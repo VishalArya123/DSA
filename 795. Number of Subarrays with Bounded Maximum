@@ -1,0 +1,41 @@
+class Solution {
+public:
+    int numSubarrayBoundedMax(vector<int>& nums, int left, int right) {
+        int n = nums.size();
+        // int count = 0;
+        // for(int i=0;i<n;i++){
+        //     int maxi=0;
+        //     for(int j=i;j<n;j++){
+        //         maxi = max(maxi, arr[j]);
+        //         if (maxi >= left && maxi <= right) {
+        //             count++;
+        //         }
+        //     }
+        // }
+        // return count;
+        
+        int allSubArrays=0;
+        int curr=0;
+        for(int i=0;i<n;i++){
+            if(nums[i]<=right){
+                curr++;
+            }
+            else{
+                curr=0;
+            }
+            allSubArrays+=curr;
+        }
+        int allSubArraysLessThanMinBound=0;
+        curr=0;
+        for(int i=0;i<n;i++){
+            if(nums[i]<=(left-1)){
+                curr++;
+            }
+            else{
+                curr=0;
+            }
+            allSubArraysLessThanMinBound+=curr;
+        }
+        return allSubArrays-allSubArraysLessThanMinBound;
+    }
+};
