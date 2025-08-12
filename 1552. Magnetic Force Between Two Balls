@@ -1,0 +1,34 @@
+class Solution {
+public:
+
+    int no_of_balls(vector<int>& position,int n,int k){
+        int balls=1;
+        int curr_position=position[0];
+        for(int i=1;i<n;i++){
+            if((position[i]-curr_position)>=k){
+                curr_position=position[i];
+                balls+=1;
+            }
+        }
+        return balls;
+    }
+
+    int maxDistance(vector<int>& position, int m) {
+        sort(position.begin(),position.end());
+        int n=position.size();
+        int low=1;
+        int high=position[n-1]-position[0];
+        int ans=-1;
+        while(low<=high){
+            int mid=(low+high)/2;
+            if(no_of_balls(position,n,mid)>=m){
+                ans=mid;
+                low=mid+1;
+            }
+            else{
+                high=mid-1;
+            }
+        }
+        return ans;
+    }
+};
