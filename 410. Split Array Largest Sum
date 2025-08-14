@@ -1,0 +1,36 @@
+class Solution {
+public:
+
+    int no_of_subarrays_possible(vector<int>& arr,int mid,int n){
+        int sum=0;
+        int c=1;
+        for(int i=0;i<n;i++){
+            if(sum+arr[i]>mid){
+                sum=arr[i];
+                c++;
+            }
+            else{
+                sum+=arr[i];
+            }
+        }
+        return c;
+    }
+
+    int splitArray(vector<int>& nums, int k) {
+        int n=nums.size();
+        int low=*max_element(nums.begin(),nums.end());
+        int high=accumulate(nums.begin(),nums.end(),0);
+        int ans=-1;
+        while(low<=high){
+            int mid=(low+high)/2;
+            if(no_of_subarrays_possible(nums,mid,n)<=k){
+                ans=mid;
+                high=mid-1;
+            }
+            else{
+                low=mid+1;
+            }
+        }
+        return ans;
+    }
+};
