@@ -1,0 +1,44 @@
+class Solution {
+public:
+
+    int findKthMergedElement(vector<int>& arr1, vector<int>& arr2, int k) {
+        int m = arr1.size(), n = arr2.size();
+        int i = 0, j = 0, count = 0, ans = -1;
+
+        while (i < m && j < n) {
+            if (arr1[i] < arr2[j]) {
+                ans = arr1[i++];
+            } else {
+                ans = arr2[j++];
+            }
+            count++;
+            if (count == k) return ans;
+        }
+
+        while (i < m) {
+            ans = arr1[i++];
+            count++;
+            if (count == k) return ans;
+        }
+
+        while (j < n) {
+            ans = arr2[j++];
+            count++;
+            if (count == k) return ans;
+        }
+
+        return ans;
+    }
+
+    double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
+        int total = nums1.size() + nums2.size();
+
+        if (total % 2 == 1) {
+            return findKthMergedElement(nums1, nums2, total / 2 + 1);
+        } else {
+            int left = findKthMergedElement(nums1, nums2, total / 2);
+            int right = findKthMergedElement(nums1, nums2, total / 2 + 1);
+            return (left + right) / 2.0;
+        }
+    }
+};
