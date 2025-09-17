@@ -1,0 +1,24 @@
+class Solution {
+public:
+    vector<vector<int>> fullvector;
+
+    void print_sequences(int i,vector<int>& v,vector<int> nums,int n){
+        if(i>=n){
+            fullvector.push_back(v);
+            return;
+        }
+
+        v.push_back(nums[i]);
+        print_sequences(i+1,v,nums,n);
+
+        v.pop_back();
+        print_sequences(i+1,v,nums,n);
+
+    } 
+
+    vector<vector<int>> subsets(vector<int>& nums) {
+        vector<int> v;
+        print_sequences(0,v,nums,nums.size());
+        return fullvector;
+    }
+};
