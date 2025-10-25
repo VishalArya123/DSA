@@ -1,0 +1,28 @@
+class Solution {
+public:
+    vector<int> rearrangeArray(vector<int>& nums) {
+        int n=nums.size();
+        vector<int> pvec,nvec;
+        for(auto i:nums){
+            if (i<0){
+                nvec.push_back(i);
+            }
+            else{
+                pvec.push_back(i);
+            }
+        }
+        int j=0;
+        int k=0;
+        for(int i=0;i<n;i++){
+            if(i%2==0){
+                nums[i]=pvec[j];
+                j++;
+            }
+            else{
+                nums[i]=nvec[k];
+                k++;
+            }
+        }
+        return nums;
+    }
+};
